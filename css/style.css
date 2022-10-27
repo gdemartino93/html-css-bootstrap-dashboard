@@ -5,6 +5,7 @@
 }
 header{
     width: 100%;
+    height: 50px;
     background-color: #F8F9FA;
 }
 .logoimg{
@@ -29,20 +30,53 @@ header{
      top: 8px;
      left: 11px;
 }
-.nav-item i{
-}
+
 .nav-item a{
     color: white;
     text-decoration: none;
     font-weight: bold;
 }
+.sez-blu{
+    background: #1B72E8;
+    width: 100%;
+    color: white;
+}
  
 .prova{
-    width: 100px;
-    height: 50px;
+    height: 100px;
     border: 1px solid black;
+    /* debug class */
+}
+.wrapper{
+    display: flex;
 }
 
-main{
-    background: red;
+.explorer{
+    background: white;
+   flex: 1;
+   min-height: 1000px;
+}
+.nav{
+    width: 75px; 
+}
+/* LABEL */
+.lbl{
+    padding: 2px 8px;
+    background: rgba(113,120,129,0.5);
+    border-radius: 43%;
+    color: white;
+}
+.fixed{
+    height: calc(100vh - 50px);
+    position: fixed;
+    left: 0;
+    background-color: black;
+}
+
+
+@media screen and (min-width: 990px) {
+    .nav{
+        width: 150px;
+    }
+    
 }

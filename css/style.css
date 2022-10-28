@@ -78,7 +78,7 @@ header{
     border-radius: 20px;
 }
 .orange{
-    background: orange;
+    background: #F26551;
 }
 @media screen and (min-width: 990px) {
     .nav{

@@ -9,7 +9,87 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>Dashbasdoard</title>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+
+
+    <script>
+        window.onload = function () {
+        
+        var chart = new CanvasJS.Chart("chartContainer", {
+            exportEnabled: true,
+            animationEnabled: true,
+            title:{
+                text: "Lista degli Utenti attivi"
+            },
+            
+            axisX: {
+                title: "Utenti"
+            },
+            axisY: {
+                title: "Attivi Ora",
+                titleFontColor: "#4F81BC",
+                lineColor: "#4F81BC",
+                labelFontColor: "#4F81BC",
+                tickColor: "#4F81BC",
+                includeZero: true
+            },
+            axisY2: {
+                title: "Visualizzazione",
+                titleFontColor: "#C0504E",
+                lineColor: "#C0504E",
+                labelFontColor: "#C0504E",
+                tickColor: "#C0504E",
+                includeZero: true
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor: "pointer",
+                itemclick: toggleDataSeries
+            },
+            data: [{
+                type: "column",
+                name: "Attivi",
+                
+                showInLegend: true,      
+                yValueFormatString: "#,##0.# Units",
+                dataPoints: [
+                    { label: "Ora",  y: 19034.5 },
+                    { label: "Ultima ora", y: 20015 },
+                    { label: "Ultime 24h", y: 25342 },
+                    { label: "Ieri",  y: 20088 },
+                    { label: "Tutta la settimana",  y: 28234 }
+                ]
+            },
+            {
+                type: "column",
+                name: "Visualizzazioni",
+                axisYType: "secondary",
+                showInLegend: true,
+                yValueFormatString: "#,##0.# Units",
+                dataPoints: [
+                    { label: "Ora", y: 210.5 },
+                    { label: "Ultima ora", y: 135 },
+                    { label: "Ultime 24h", y: 425 },
+                    { label: "Ieri", y: 130 },
+                    { label: "Tutta la settimana", y: 528 }
+                ]
+            }]
+        });
+        chart.render();
+        function toggleDataSeries(e) {
+            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            } else {
+                e.dataSeries.visible = true;
+            }
+            e.chart.render();
+        }
+        }
+        </script>
+    <title>Dashboard</title>
 </head>
 <body>
     <header>
@@ -23,7 +103,17 @@
                     </div>
                 </div>
                 <div class="col-1">
-                    <i class="fa-solid fa-bell"></i>
+                    
+                    <div class="btn-group">
+                        <button type="button" class="btn " data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-bell text-warning"></i>
+                        </button>
+                        <ul id="right" class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -34,7 +124,7 @@
     <div class="aside">
             <div class="col-md-1 col-lg-2 px-md-2 bg-dark nav">
                 <div class="d-flex flex-column align-items-center  pt-3 text-white fixed">
-                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start px-2 py-4" id="menu">
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="bi bi-house-door-fill"></i> <span class="d-md-none d-lg-inline">Home</span>
@@ -51,7 +141,7 @@
                     <div class="dropdown pb-4">
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="true">
                             <i class="bi bi-gear"></i>
-                            <span class="d-none d-sm-inline mx-1">Admin</span>
+                            <span class="d-none d-lg-inline mx-1">Admin</span>
                         </a>
                     </div>
                 </div>
@@ -62,16 +152,18 @@
         <section class="sez-blu">
                 <div class="container-fluid">
                     <div class="row row-md-1 row-lg-2 py-3 px-2">
-                        <div class="col-12 col-lg-6 mb-3">
+                        <div class="col-12 col-lg-8 mb-3">
                             <span class="fs-1">Boolean</span>
                             <span class="lbl">Piano Blaze</span>
-                                <div class="col-6">
+                                <div class="col-10">
                                     <span class="lbl">3 App</span>
                                     <span> >> </span>
                                     <span class="lbl">+</span>
+                                    <span class="lbl d-none d-lg-inline"> Boolean Web App</span>
+                                    <span class="lbl d-none d-lg-inline">Boolean Blog App</span>
                                 </div>
                         </div>                          
-                    <div class="col-12 col-lg-6  d-flex flex-column justify-content-center">
+                    <div class="col-12 col-lg-4  d-flex flex-column justify-content-center">
                         <span>Studenti Online negli ultimi 30 minuti</span>
                         <span class="fs-1">125</span>
                     </div>
@@ -85,7 +177,28 @@
             <div class="bg-light rounded h-100 border">
                 <div class="d-flex align-items-center justify-content-between border">
                     <span class=" fs-2 p-2">Prossime Classi</span>
-                    <span><i class="fa-regular fa-square-plus fs-1 mx-5 fw-normal text-primary"></i></span>
+                    <button class="btn text-primary btn-outline-primary mx-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-solid fa-plus"></i></button>
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                        <div class="offcanvas-header">
+                          <h5 id="offcanvasRightLabel">Aggiungi Classe</h5>
+                          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <span class="fs-2">Nome</span>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Classe --" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                              </div>
+                              <div class="form-group d-flex flex-column">
+                                <label class="active py-2" for="dateStandard">Data Inizio</label>
+                                <input class="form-control" type="date" id="dateStandard" name="dateStandard">
+                                </div>
+                            <div class="py-3">
+                                <button type="button" class="btn btn-success">Aggiungi</button>
+                                <button type="button" class="btn btn-warning">Reset</button>
+                            </div>
+                        </div>
+                      </div>
+                    <!-- <span><i class="fa-regular fa-square-plus fs-1 mx-5 fw-normal text-primary"></i></span> -->
                 </div>
                 
                 <table class="table table-hover">
@@ -100,67 +213,150 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th scope="row" class="fw-normal"><i class="bi bi-code-square mx-2"></i>Classe 10</th>
+                            <th class="table_larger" scope="row">
+                                <i class="fa-solid fa-code round_circle border bg-orange color-white orange"></i>
+                                Classe 75
+                            </th>
                             <td>15 Feb 2021</td>
                             <td>20%</td>
-                            <td><span class="lbl">asd</span></td>
-                            <td> asd</td>
+                            <td><span class="lbl bg-success">Done</span></td>
+                            <td>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                                
+                            </td>
                         </tr>
                         <tr>
-                            <th scope="row" class="fw-normal"><i class="bi bi-code-square mx-2"></i>Classe 18</th>
+                            <th class="table_larger" scope="row">
+                                <i class="fa-solid fa-code round_circle border bg-orange color-white orange"></i>
+                                Classe 75
+                            </th>
                             <td>16 Feb 2021</td>
                             <td>20%</td>
-                            <td><span class="lbl">asd</span></td>
-                            <td>asdasd</td>
+                            <td><span class="lbl bg-warning">Process</span></td>
+                            <td>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </td>
                         </tr>
                         <tr>
-                            <th scope="row" class="fw-normal"><i class="bi bi-code-square mx-2"></i>Classe 20</th>
+                            <th class="table_larger" scope="row">
+                                <i class="fa-solid fa-code round_circle border bg-orange color-white orange"></i>
+                                Classe 75
+                            </th>
                             <td>20 Feb 2021</td>
                             <td>20%</td>
-                            <td><span class="lbl">asd</span></td>
-                            <td>asdasd</td>
+                            <td><span class="lbl bg-danger">Failed</span></td>
+                            <td>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </td>
                         </tr>
                         <tr>
-                            <th scope="row" class="fw-normal"><i class="bi bi-code-square mx-2 "></i>Classe 10</th>
+                            <th class="table_larger" scope="row">
+                                <i class="fa-solid fa-code round_circle border bg-orange color-white orange"></i>
+                                Classe 75
+                            </th>
                             <td>15 Feb 2021</td>
                             <td>20%</td>
-                            <td><span class="lbl">asd</span></td>
-                            <td> asd</td>
+                            <td><span class="lbl bg-danger">Failed</span></td>
+                            <td>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </td>
                         </tr>
                         <tr>
-                            <th scope="row" class="fw-normal"><i class="bi bi-code-square mx-2"></i>Classe 18</th>
+                            <th class="table_larger" scope="row">
+                                <i class="fa-solid fa-code round_circle border bg-orange color-white orange"></i>
+                                Classe 75
+                            </th>
                             <td>16 Feb 2021</td>
                             <td>20%</td>
-                            <td><span class="lbl">asd</span></td>
-                            <td>asdasd</td>
+                            <td><span class="lbl bg-danger">Failed</span></td>
+                            <td>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </td>
                         </tr>
                         <tr>
-                            <th scope="row" class="fw-normal"><i class="bi bi-code-square mx-2"></i>Classe 20</th>
+                            <th class="table_larger" scope="row">
+                                <i class="fa-solid fa-code round_circle border bg-orange color-white orange"></i>
+                                Classe 75
+                            </th>
                             <td>20 Feb 2021</td>
                             <td>20%</td>
-                            <td><span class="lbl">asd</span></td>
-                            <td>asdasd</td>
+                            <td><span class="lbl bg-danger">Failed</span></td>
+                            <td>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </td>
                         </tr>
                         <tr>
-                            <th scope="row" class="fw-normal"><i class="bi bi-code-square mx-2"></i>Classe 18</th>
+                            <th class="table_larger" scope="row">
+                                <i class="fa-solid fa-code round_circle border bg-orange color-white orange"></i>
+                                Classe 75
+                            </th>
                             <td>16 Feb 2021</td>
                             <td>20%</td>
-                            <td><span class="lbl">asd</span></td>
-                            <td>asdasd</td>
+                            <td><span class="lbl bg-danger">Failed</span></td>
+                            <td>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </td>
                         </tr>
                         <tr>
-                            <th scope="row" class="fw-normal"><i class="bi bi-code-square mx-2"></i>Classe 20</th>
+                            <th class="table_larger" scope="row">
+                                <i class="fa-solid fa-code round_circle border bg-orange color-white orange"></i>
+                                Classe 75
+                            </th>
                             <td>20 Feb 2021</td>
                             <td>20%</td>
-                            <td><span class="lbl">asd</span></td>
-                            <td>asdasd</td>
+                            <td><span class="lbl bg-danger">Failed</span></td>
+                            <td>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </td>
                         </tr>
                         
                     </tbody>
                 </table>
             </div>
         </div>
-   <div class="col-md-12 col-lg-6 order-md-3 order-lg-3 p-2 ">
+        <!-- qua -->
+        
+   <div class="col-md-12 col-lg-8 order-md-3 order-lg-3 p-2 ">
     <div class="d-flex align-items-center justify-content-between border">
         <span class=" fs-2 p-2">F.A.Q.</span>
     </div>
@@ -198,7 +394,7 @@
       </div>
    </div>
 
-   <div class="col-md-12 col-lg-4 order-md-3 order-lg-2 p-2 ">
+   <div class="col-md-12 col-lg-4 order-md-3 order-lg-2 p-2 h-100">
     <div class="d-flex align-items-center justify-content-between border">
         <span class=" fs-2 p-2">Todo</span>
     </div>
@@ -209,23 +405,23 @@
         </li>
         <li class="list-group-item">
           <input class="form-check-input me-1" type="checkbox" value="" id="secondCheckboxStretched">
-          <label class="form-check-label stretched-link" for="secondCheckboxStretched">Lezione Bootstrap 5 ad Hadson classe 80</label>
+          <label class="form-check-label stretched-link" for="secondCheckboxStretched">Lezione Bootstrap 5 classe 80</label>
         </li>
         <li class="list-group-item">
           <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckboxStretched">
           <label class="form-check-label stretched-link" for="thirdCheckboxStretched">Controllare username Github studenti</label>
         </li>
       </ul>
-   </div>
+      
+     
+      <div id="chartContainer" class="mt-5"></div>
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    
+    </div>
    <!-- canvas -->
-   <div class="col-md-12 col-lg-4 order-lg-4">
-
-
    </div>
 </div>
         <!-- chiusura row -->
-       
-
     </div>
             <!-- chiusura container -->
         
@@ -252,12 +448,3 @@
 </html>
 
 
-<!-- 
-<div class="row">
-    <div class="col-12 ">
-        <span class="lbl ">3 app</span>
-        <span class="maggiore"> >> </span>
-        <span class="lbl">+</span>
-    </div>
-    
-</div> -->

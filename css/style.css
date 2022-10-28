@@ -35,22 +35,16 @@ header{
     color: white;
     text-decoration: none;
     font-weight: bold;
+    font-size: 20px;
 }
 .sez-blu{
     background: #1B72E8;
     width: 100%;
     color: white;
 }
- 
-.prova{
-    height: 100px;
-    border: 1px solid black;
-    /* debug class */
-}
 .wrapper{
     display: flex;
 }
-
 .explorer{
     background: white;
    flex: 1;
@@ -62,7 +56,7 @@ header{
 /* LABEL */
 .lbl{
     padding: 2px 8px;
-    background: rgba(113,120,129,0.5);
+    background: #165bba;
     border-radius: 43%;
     color: white;
 }
@@ -70,10 +64,22 @@ header{
     height: calc(100vh - 50px);
     position: fixed;
     left: 0;
-    background-color: black;
+    background: linear-gradient(45deg, #132940  60%, #051e34 60%);
 }
-
-
+.round_circle {
+    padding-right: 25px;
+    padding-left: 7px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    display: inline-block;
+    text-align: center;
+    width: 23px;
+    border: 1px solid #f16450;
+    border-radius: 20px;
+}
+.orange{
+    background: orange;
+}
 @media screen and (min-width: 990px) {
     .nav{
         width: 150px;
